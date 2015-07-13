@@ -9,8 +9,7 @@ var Vibe = require('ui/vibe');
 var _ = require('underscore');
 
 var storageKeys = [
-  'p.singles',
-  'p.doubles',
+
   'g.traditional',
   'g.variations',
   'g.crash',
@@ -21,30 +20,13 @@ var storageKeys = [
   'g.lowball',
   'g.backup',
   'g.toss',
-  't.traditional',
-  't.ninegr',
-  't.sevengr',
-  't.fivegr',
-  'm.single',
-  'm.twoofthree'
+  'g.manualcount',
+  'g.muggins'
+  
+  
 ];
 
 var storageKeysStatus = {};
-
-
-var groups = {
-  p:"Participants",
-  g:"Game Format",
-  t:"Tournament Format",
-  m:"Match Format"
-};
-
-var groupCounts =  {
-    p:{s:0,u:0},
-    g:{s:0,u:0},
-    t:{s:0,u:0},
-    m:{s:0,u:0}
-  };
 
 var downClicks = 0;
 
@@ -52,31 +34,20 @@ var downClicks = 0;
  * Menu Options
  */
 
-var participantsMenuOptions = [
-  {
-    title: "Singles",
-    storageKey: "p.singles"
-  },
-  {
-    title: "Doubles",
-    storageKey: "p.doubles"
-  }
-];
-
 var gameFormatMenuOptions = [
   {
     title: "Traditional",
-    icon: "images/crib_small.png",
+    icon: "IMAGES_TRAD",
     storageKey: "g.traditional"
   },
   {
     title: "Variations",
-    icon: "images/crib_var.png",
+    icon: "IMAGES_VAR",
     storageKey: "g.variations"
   },
   {
     title: "Crash",
-    icon: "images/crashSmall.png",
+    icon: "IMAGES_CRASH",
     storageKey: "g.crash"
   },
   {
@@ -113,61 +84,20 @@ var gameFormatMenuOptions = [
     title: "Lowball",
     icon: "images/loserTransparent.png",
     storageKey: "g.lowball"
+  },
+  {
+    title: "Manual Count",
+    icon: "images/mugginsIcon.png",
+    storageKey: "g.manualcount"
+  },
+  {
+    title: "Muggins",
+    icon: "images/muggerIcon.png",
+    storageKey: "g.muggins"
   }
 ];
 
-var tournamentFormatMenuOptions = [
-  {
-    title: "Traditional",
-    storageKey: "t.traditional"
-  },
-  {
-    title: "9 Game GR",
-    storageKey: "t.ninegr"
-  },
-  {
-    title: "7 Game GR",
-    storageKey: "t.sevengr"
-  },
-  {
-    title: "5 Game GR",
-    storageKey: "t.fivegr"
-  }
-];
 
-var matchFormatMenuOptions = [
-  {
-    title: "Single Game",
-    storageKey: "m.single"
-  },
-  {
-    title: "Best 2 of 3",
-    storageKey: "m.twoofthree"
-  }
-];
-
-var mainMenuOptions = [
-  {
-    title: groups.p,
-    groupKey: 'p',
-    subMenuOptions: participantsMenuOptions
-  },
-  {
-    title: groups.g,
-    groupKey: 'g',
-    subMenuOptions: gameFormatMenuOptions
-  },
-  {
-    title: groups.t,
-    groupKey: 't',
-    subMenuOptions: tournamentFormatMenuOptions
-  },
-  {
-    title: groups.m,
-    groupKey: 'm',
-    subMenuOptions: matchFormatMenuOptions
-  }
-];
 
 /**
  * Layers, windows, menus, etc
@@ -186,7 +116,7 @@ var mainMenu = new UI.Menu({
   sections:[
     {
       title: "Subscriptions",
-      items: mainMenuOptions
+      items: gameFormatMenuOptions
     }
   ]
 });
@@ -203,7 +133,7 @@ var mainMenu = new UI.Menu({
 main.on('click', 'select', function(e) {
   initStorage();
   downClicks = 0;
-  mainMenu.show();
+  showOptionsMenu();
 });
 
 //if we click down on the main screen, increment our down click count
@@ -226,67 +156,22 @@ main.on('longClick','select',function(e){
   downClicks=0;
 });
 
-//when we select an item on the main menu, show the option menu
-mainMenu.on('select',showOptionsMenu);
-//if we long select an item, we are going to subscribe/unsubscribe to all topics under the group
-mainMenu.on('longSelect',toggleAll);
-
 //show the main window
 main.show();
 
-//if the number of topics subscribed is <= unsubscribed, then it will subscribe to all unsubscribed
-//otherwise it will unsubscribe to all subscribed
-function toggleAll(event){
-  Vibe.vibrate('short');
-  var menu = event.menu;
-  var item = menu.item(event.sectionIndex,event.itemIndex);
-  var s = groupCounts[item.groupKey].s;
-  var u = groupCounts[item.groupKey].u;
-  var f;
-  if(s <= u){
-      f = function(k){
-      if(!getSubscribedBoolean(k)){
-        Pebble.timelineSubscribe(k,function(){},function(){});
-         updateStorage(k,'s');
-      }
-    };
-  } else {
-    f = function(k){
-      if(getSubscribedBoolean(k)){
-        Pebble.timelineUnsubscribe(k,function(){},function(){});
-         updateStorage(k,'u');
-      }
-    };
-  }
-  //originally I was calling the subscribe/unscribe inside the loop
-  //and then the updateStorage/updateMainMEnuCounts inside the callback
-  //but that was giving me issues, so, I'm just doing it this way.
-  for(var i=0;i<item.subMenuOptions.length;i++){
-    var key = item.subMenuOptions[i].storageKey;
-    f(key);  
-  }
-  updateMainMenuCounts();
-}
 
 //this will go through and update the subtitle (subscribed or not subscribed)
 //for each option in the topic menu
 //then it will create the menu
-function showOptionsMenu(event){
-  var options = mainMenuOptions[event.itemIndex].subMenuOptions;
+function showOptionsMenu(){
+  var options = gameFormatMenuOptions;
   for(var i =0;i<options.length;i++){
     var subtitle = getSubscribedString(options[i].storageKey);
     options[i].subtitle = subtitle;
   }
-  var optionsMenu = new UI.Menu({
-     sections:[
-        {
-          title: "Options",
-          items: mainMenuOptions[event.itemIndex].subMenuOptions
-        }
-      ]
-    });
-    optionsMenu.on("select",toggleSubscription);
-    optionsMenu.show();
+  mainMenu.items(0,options);
+  mainMenu.on("select",toggleSubscription);
+  mainMenu.show();
 }
 
 //toggles the topic between subscribed and unsubscribed
@@ -317,7 +202,6 @@ function unsubscribe(event){
           updateStorage(item.storageKey,'u');
           item.subtitle = "Not Subscribed";
           menu.item(event.sectionIndex,event.itemIndex,item); 
-          updateMainMenuCounts();
         },
         function(error){
           console.log("Unable to unsubscribe from "+item.storageKey+": "+error);
@@ -334,7 +218,6 @@ function subscribe(event){
           updateStorage(item.storageKey,'s');
           item.subtitle = "Subscribed";
           menu.item(event.sectionIndex,event.itemIndex,item);
-           updateMainMenuCounts();
         },
         function(error){
           console.log("Unable to subscribe to "+item.storageKey+": "+error);
@@ -364,7 +247,6 @@ function initStorage(){
           var v = topics.indexOf(storageKeys[i]) >= 0 ? "s" : "u";
           updateStorage(storageKeys[i],v);
         }
-        initCounts();
       },
       function (errorString) {
         console.log('Error getting subscriptions: ' + errorString);
@@ -372,27 +254,11 @@ function initStorage(){
     );
 }
 
-/*
-function checkSubscriptions(){
-  Pebble.timelineSubscriptions(
-  function (topics) {
-    console.log('All Subscriptions: ' + topics.join(', '));
-  },
-  function (errorString) {
-    console.log('Error getting subscriptions: ' + errorString);
-  }
-);
-}
-*/
 
 //changes the status in the storage object
 //and also updates the counts for the groups
 function updateStorage(key,status){
   storageKeysStatus[key] = status;
-  var p = key.split(".");
-  var o = status == "s" ? "u" : "s";
-  groupCounts[p[0]][status]++;
-  groupCounts[p[0]][o]--;
 }
 
 //unsubscribes (API and storage) from all topics
@@ -402,32 +268,5 @@ function resetAll(){
     Pebble.timelineUnsubscribe(storageKeys[i],f,f);
     updateStorage(storageKeys[i],'u');
   }
-  initCounts();
- 
-}
+ }
 
-//updates the main menu subtitles to show the proper
-//s and u counts.
-function updateMainMenuCounts(){
-   for(var i=0;i<mainMenuOptions.length;i++){
-     mainMenuOptions[i].subtitle = "S: "+groupCounts[mainMenuOptions[i].groupKey].s+"/U: "+groupCounts[mainMenuOptions[i].groupKey].u;     
-   }
-    mainMenu.items(0,mainMenuOptions);
-   
-}
-
-//reset the group counts
-//sets everythign to 0, then increments as needed.
-function initCounts(){
-  groupCounts = {
-    p:{s:0,u:0},
-    g:{s:0,u:0},
-    t:{s:0,u:0},
-    m:{s:0,u:0}
-  };
-  _.each(storageKeysStatus,function(value,key){
-    var p = key.split(".");
-    groupCounts[p[0]][value]++;
-  });
-  updateMainMenuCounts();
-}

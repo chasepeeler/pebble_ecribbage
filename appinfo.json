@@ -29,6 +29,16 @@
                 "type": "font"
             },
             {
+                "file": "images/muggerIcon.png",
+                "name": "IMAGES_MUGGERICON_PNG",
+                "type": "png"
+            },
+            {
+                "file": "images/mugginsIcon.png",
+                "name": "IMAGES_MUGGINSICON_PNG",
+                "type": "png"
+            },
+            {
                 "file": "images/crib_var.png",
                 "name": "IMAGES_CRIB_VAR_PNG",
                 "type": "png"
