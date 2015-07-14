@@ -100,7 +100,7 @@
     "shortName": "eCribbage Tournaments",
     "uuid": "76a4e6e6-4239-4bf9-bc16-1e7736f7a0c6",
     "versionCode": 1,
-    "versionLabel": "2.0",
+    "versionLabel": "2.1",
     "watchapp": {
         "watchface": false
     }

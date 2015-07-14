@@ -7,6 +7,16 @@
 var UI = require('ui');
 var Vibe = require('ui/vibe');
 
+var legacyKeys = [
+  'p.singles',
+  'p.doubles',
+  't.traditional',
+  't.ninegr',
+  't.sevengr',
+  't.fivegr',
+  'm.single',
+  'm.twoofthree'
+];
 
 var storageKeys = [
 
@@ -244,11 +254,18 @@ function getSubscribedBoolean(key){
 //and then populating the storage item
 //with s or u
 function initStorage(){
+    
+    var f = function(){};
     Pebble.timelineSubscriptions(
       function (topics) {
         for(var i = 0;i<storageKeys.length;i++){
           var v = topics.indexOf(storageKeys[i]) >= 0 ? "s" : "u";
           updateStorage(storageKeys[i],v);
+        }
+        for(i=0; i<legacyKeys.length;i++){
+          if(topics.indexOf(legacyKeys[i]) >= 0){
+            Pebble.timelineUnsubscribe(legacyKeys[i],f,f);
+          }
         }
       },
       function (errorString) {
