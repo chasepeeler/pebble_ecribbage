@@ -43,5 +43,8 @@
     "versionLabel": "2.0",
     "watchapp": {
         "watchface": false
-    }
+    },
+  "targetPlatforms": [
+    "basalt"
+  ]
 }
