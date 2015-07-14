@@ -42,7 +42,7 @@ var gameFormatMenuOptions = [
   },
   {
     title: "Variations",
-    icon: "images/var.png",
+    icon: "images/flipped.png",
     storageKey: "g.variations"
   },
   {
@@ -131,7 +131,7 @@ var mainMenu = new UI.Menu({
 //resets our downClick count to 0,
 //and then shows the main menu
 main.on('click', 'select', function(e) {
-  initStorage();
+
   downClicks = 0;
   showOptionsMenu();
 });
@@ -156,6 +156,7 @@ main.on('longClick','select',function(e){
   downClicks=0;
 });
 
+initStorage();
 //show the main window
 main.show();
 
@@ -177,8 +178,10 @@ function showOptionsMenu(){
 //toggles the topic between subscribed and unsubscribed
 function toggleSubscription(event){
   if(isSubscribed(event)){
+    console.log("u");
     unsubscribe(event);    
   } else {
+    console.log("s");
    subscribe(event);
   }
 }
