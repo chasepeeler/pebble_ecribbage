@@ -15,11 +15,7 @@ var legacyKeys = [
   't.sevengr',
   't.fivegr',
   'm.single',
-  'm.twoofthree'
-];
-
-var storageKeys = [
-
+  'm.twoofthree',
   'g.traditional',
   'g.variations',
   'g.crash',
@@ -32,6 +28,22 @@ var storageKeys = [
   'g.toss',
   'g.manualcount',
   'g.muggins'
+];
+
+var storageKeys = [
+
+  'traditional',
+  'variations',
+  'crash',
+  'kings',
+  'cross',
+  'baseball',
+  'jokers',
+  'lowball',
+  'backup',
+  'toss',
+  'manualcount',
+  'muggins'
   
   
 ];
@@ -48,62 +60,62 @@ var gameFormatMenuOptions = [
   {
     title: "Traditional",
     icon: "images/trad.png",
-    storageKey: "g.traditional"
+    storageKey: "traditional"
   },
   {
     title: "Variations",
     icon: "images/flipped.png",
-    storageKey: "g.variations"
+    storageKey: "variations"
   },
   {
     title: "Crash",
     icon: "images/crash.png",
-    storageKey: "g.crash"
+    storageKey: "crash"
   },
   {
     title: "Kings",
     icon: "images/kings.png",
-    storageKey: "g.kings"
+    storageKey: "kings"
   },
   {
     title: "Cross",
     icon: "images/cross.png",
-    storageKey: "g.cross"
+    storageKey: "cross"
   },
   {
     title: "Baseball",
     icon: "images/baseball.png",
-    storageKey: "g.baseball"
+    storageKey: "baseball"
   },
   {
     title: "Back up 10",
     icon: "images/backten.png",
-    storageKey: "g.backup"
+    storageKey: "backup"
   },
   {
     title: "Toss 5s",
     icon: "images/tossfives.png",
-    storageKey: "g.toss"
+    storageKey: "toss"
   },
   {
     title: "4 Jokers",
     icon: "images/jokers.png",
-    storageKey: "g.jokers"
+    storageKey: "jokers"
   },
   {
     title: "Lowball",
     icon: "images/lowball.png",
-    storageKey: "g.lowball"
+    storageKey: "lowball"
   },
   {
     title: "Manual Count",
     icon: "images/manualcount.png",
-    storageKey: "g.manualcount"
+    storageKey: "manualcount"
   },
   {
     title: "Muggins",
     icon: "images/muggins.png",
-    storageKey: "g.muggins"
+    storageKey: "muggins"
   }
 ];
 
@@ -265,6 +277,13 @@ function initStorage(){
         for(i=0; i<legacyKeys.length;i++){
           if(topics.indexOf(legacyKeys[i]) >= 0){
             Pebble.timelineUnsubscribe(legacyKeys[i],f,f);
+            //lets make sure we subscribe to the new key, if one exists
+            //since the new key is just g.<old key>
+            var p = legacyKeys[i].split(".");
+            if(p[0] == "g" && storageKeys.indexOf(p[1]) >= 0){
+              updateStorage(p[1],'s');
+              Pebble.timelineSubscribe(p[1]);
+            }
           }
         }
       },
