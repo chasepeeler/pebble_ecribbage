@@ -9,64 +9,29 @@
     "resources": {
         "media": [
             {
-                "file": "images/backten.png",
-                "name": "IMAGES_BACKTEN_PNG",
+                "file": "images/menu_icon.png",
+                "menuIcon": true,
+                "name": "IMAGE_MENU_ICON",
                 "type": "png"
             },
             {
-                "file": "images/crash.png",
-                "name": "IMAGES_CRASH_PNG",
+                "file": "images/logo_splash.png",
+                "name": "IMAGE_LOGO_SPLASH",
                 "type": "png"
+            },
+            {
+                "file": "images/tile_splash.png",
+                "name": "IMAGE_TILE_SPLASH",
+                "type": "png"
+            },
+            {
+                "file": "fonts/UbuntuMono-Regular.ttf",
+                "name": "MONO_FONT_14",
+                "type": "font"
             },
             {
                 "file": "images/trad.png",
-                "menuIcon": true,
                 "name": "IMAGES_TRAD_PNG",
-                "type": "png"
-            },
-            {
-                "file": "images/var.png",
-                "name": "IMAGES_VAR_PNG",
-                "type": "png"
-            },
-            {
-                "file": "images/cross.png",
-                "name": "IMAGES_CROSS_PNG",
-                "type": "png"
-            },
-            {
-                "file": "images/jokers.png",
-                "name": "IMAGES_JOKERS_PNG",
-                "type": "png"
-            },
-            {
-                "file": "images/kings.png",
-                "name": "IMAGES_KINGS_PNG",
-                "type": "png"
-            },
-            {
-                "file": "images/lowball.png",
-                "name": "IMAGES_LOWBALL_PNG",
-                "type": "png"
-            },
-            {
-                "file": "images/muggins.png",
-                "name": "IMAGES_MUGGINS_PNG",
-                "type": "png"
-            },
-            {
-                "file": "images/manualcount.png",
-                "name": "IMAGES_MANUALCOUNT_PNG",
-                "type": "png"
-            },
-            {
-                "file": "images/baseball.png",
-                "name": "IMAGES_BASEBALL_PNG",
-                "type": "png"
-            },
-            {
-                "file": "images/tossfives.png",
-                "name": "IMAGES_TOSSFIVES_PNG",
                 "type": "png"
             }
         ]

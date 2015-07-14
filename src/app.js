@@ -6,7 +6,7 @@
 
 var UI = require('ui');
 var Vibe = require('ui/vibe');
-//var _ = require('underscore');
+
 
 var storageKeys = [
 
