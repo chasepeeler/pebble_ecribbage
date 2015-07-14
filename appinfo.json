@@ -29,69 +29,64 @@
                 "type": "font"
             },
             {
-                "file": "images/muggerIcon.png",
-                "name": "IMAGES_MUGGERICON_PNG",
+                "file": "images/backten.png",
+                "name": "IMAGES_BACKTEN_PNG",
                 "type": "png"
             },
             {
-                "file": "images/mugginsIcon.png",
-                "name": "IMAGES_MUGGINSICON_PNG",
+                "file": "images/crash.png",
+                "name": "IMAGES_CRASH_PNG",
                 "type": "png"
             },
             {
-                "file": "images/crib_var.png",
-                "name": "IMAGES_CRIB_VAR_PNG",
-                "type": "png"
-            },
-            {
-                "file": "images/crib_icon.png",
+                "file": "images/trad.png",
                 "menuIcon": true,
-                "name": "IMAGES_CRIB_ICON_PNG",
+                "name": "IMAGES_TRAD_PNG",
                 "type": "png"
             },
             {
-                "file": "images/backTenIcon.png",
-                "name": "IMAGES_BACKTENICON_PNG",
+                "file": "images/var.png",
+                "name": "IMAGES_VAR_PNG",
                 "type": "png"
             },
             {
-                "file": "images/fourJokersIcon.png",
-                "name": "IMAGES_FOURJOKERSICON_PNG",
+                "file": "images/cross.png",
+                "name": "IMAGES_CROSS_PNG",
                 "type": "png"
             },
             {
-                "file": "images/loserTransparent.png",
-                "name": "IMAGES_LOSERTRANSPARENT_PNG",
+                "file": "images/jokers.png",
+                "name": "IMAGES_JOKERS_PNG",
                 "type": "png"
             },
             {
-                "file": "images/rtbIcon.png",
-                "name": "IMAGES_RTBICON_PNG",
+                "file": "images/kings.png",
+                "name": "IMAGES_KINGS_PNG",
                 "type": "png"
             },
             {
-                "file": "images/tossFives.png",
+                "file": "images/lowball.png",
+                "name": "IMAGES_LOWBALL_PNG",
+                "type": "png"
+            },
+            {
+                "file": "images/muggins.png",
+                "name": "IMAGES_MUGGINS_PNG",
+                "type": "png"
+            },
+            {
+                "file": "images/manualcount.png",
+                "name": "IMAGES_MANUALCOUNT_PNG",
+                "type": "png"
+            },
+            {
+                "file": "images/baseball.png",
+                "name": "IMAGES_BASEBALL_PNG",
+                "type": "png"
+            },
+            {
+                "file": "images/tossfives.png",
                 "name": "IMAGES_TOSSFIVES_PNG",
-                "type": "png"
-            },
-            {
-                "file": "images/crossicon.png",
-                "name": "IMAGES_CROSSICON_PNG",
-                "type": "png"
-            },
-            {
-                "file": "images/kc_small.png",
-                "name": "IMAGES_KC_SMALL_PNG",
-                "type": "png"
-            },
-            {
-                "file": "images/crashSmall.png",
-                "name": "IMAGES_CRASHSMALL_PNG",
-                "type": "png"
-            },
-            {
-                "file": "images/crib_small.png",
-                "name": "IMAGES_CRIB_SMALL_PNG",
                 "type": "png"
             }
         ]

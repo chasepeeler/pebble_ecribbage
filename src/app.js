@@ -6,7 +6,7 @@
 
 var UI = require('ui');
 var Vibe = require('ui/vibe');
-var _ = require('underscore');
+//var _ = require('underscore');
 
 var storageKeys = [
 
@@ -37,62 +37,62 @@ var downClicks = 0;
 var gameFormatMenuOptions = [
   {
     title: "Traditional",
-    icon: "IMAGES_TRAD",
+    icon: "images/trad.png",
     storageKey: "g.traditional"
   },
   {
     title: "Variations",
-    icon: "IMAGES_VAR",
+    icon: "images/var.png",
     storageKey: "g.variations"
   },
   {
     title: "Crash",
-    icon: "IMAGES_CRASH",
+    icon: "images/crash.png",
     storageKey: "g.crash"
   },
   {
     title: "Kings",
-    icon: "images/kc_small.png",
+    icon: "images/kings.png",
     storageKey: "g.kings"
   },
   {
     title: "Cross",
-    icon: "images/crossicon.png",
+    icon: "images/cross.png",
     storageKey: "g.cross"
   },
   {
     title: "Baseball",
-    icon: "images/rtbIcon.png",
+    icon: "images/baseball.png",
     storageKey: "g.baseball"
   },
   {
     title: "Back up 10",
-    icon: "images/backTenIcon.png",
+    icon: "images/backten.png",
     storageKey: "g.backup"
   },
   {
     title: "Toss 5s",
-    icon: "images/tossFives.png",
+    icon: "images/tossfives.png",
     storageKey: "g.toss"
   },
   {
     title: "4 Jokers",
-    icon: "images/fourJokersIcon.png",
+    icon: "images/jokers.png",
     storageKey: "g.jokers"
   },
   {
     title: "Lowball",
-    icon: "images/loserTransparent.png",
+    icon: "images/lowball.png",
     storageKey: "g.lowball"
   },
   {
     title: "Manual Count",
-    icon: "images/mugginsIcon.png",
+    icon: "images/manualcount.png",
     storageKey: "g.manualcount"
   },
   {
     title: "Muggins",
-    icon: "images/muggerIcon.png",
+    icon: "images/muggins.png",
     storageKey: "g.muggins"
   }
 ];
@@ -106,7 +106,7 @@ var gameFormatMenuOptions = [
 //This is what we see when the app is opened
 var main = new UI.Card({
   title: 'eCribbage',
-  icon: 'images/crib_small.png',
+  icon: 'images/trad.png',
   subtitle:'Tournaments',
   body: 'Press the middle button to configure subscriptions.'
 });
